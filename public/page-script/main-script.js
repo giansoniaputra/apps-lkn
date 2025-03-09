@@ -46,3 +46,19 @@ let renderFileProgress = (
         },
     });
 };
+
+let rulesCurrency = (element) => {
+    $(element).on("keydown", function (e) {
+        let key = e.key;
+        if (
+            !/[0-9,]/.test(key) &&
+            key !== "Backspace" &&
+            key !== "Delete" &&
+            key !== "ArrowLeft" &&
+            key !== "Tab" &&
+            key !== "ArrowRight"
+        ) {
+            e.preventDefault(); // Mencegah input jika bukan angka atau koma
+        }
+    });
+}

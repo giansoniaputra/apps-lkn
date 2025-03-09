@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>{{ isset($title) ? $title . ' | ' : '' }} Coffee Shop</title>
+    <title>Apps Generate LKN</title>
     <meta name="description"
         content="Dashboard pages contains different layouts to provide stats, graphics, listings, categories, banners and so on. They have various implementations of plugins such as Datatables, Chart.js, Glide.js and Plyr.js with alternative extensions." />
     <!-- Favicon Tags Start -->

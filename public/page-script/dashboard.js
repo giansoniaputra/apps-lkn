@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    renderFile('render-filter', 'select[name="search"]')
     // datatables
     let table = $("#tables-nasabah").DataTable({
         scrollX: true,
@@ -9,7 +10,7 @@ $(document).ready(function () {
         ajax: {
             url: "/dataTablesNasabah",
             data: (d) => {
-                d.search = $("#search").val();
+                d.search = $("select[name='search']").val();
             },
         },
         sDom: '<"row"<"col-sm-12"<"table-container"t>r>><"row"<"col-12"p>>', // Hiding all other dom elements except table and pagination
@@ -69,7 +70,9 @@ $(document).ready(function () {
         document.querySelector(".dataTables_scrollBody").style.height =
             this._staticHeight * pageLength + "px";
     }
-
+    $("select[name='search']").on("change", function () {
+        table.ajax.reload()
+    })
     $("#btn-upload-excel").on("click", function () {
         $("#modal-excel").modal("show");
     });
@@ -103,6 +106,7 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (response) {
+                renderFile('render-filter', 'select[name="search"]')
                 $("#loader3").html("")
                 $(button).removeAttr("disabled");
                 $("#file").val("");
@@ -120,6 +124,94 @@ $(document).ready(function () {
             }
         });
     });
+    // AMBIL DATA NASABAH
+    $("#tables-nasabah").on("click", ".edit-button", function () {
+        $("#loader3").html(loader3)
+        let button = $(this)
+        $(button).attr("disabled", "true");
+        let id = $(this).data("id")
+        $.ajax({
+            url: "/edit/" + id,
+            type: "GET",
+            dataType: 'json',
+            success: function (response) {
+                $(button).removeAttr("disabled");
+                let data = response.data
+                $("#loader3").html("")
+                $("#rekening").val(data.rekening)
+                $("#cabang").val(data.cabang)
+                $("#unit").val(data.unit)
+                $("#nama").val(data.nama)
+                $("#alamat").val(data.alamat)
+                $("#plafond").val(rupiah(data.plafond))
+                $("#jenis_agunan").val(data.jenis_agunan)
+                $("#kondisi").val(data.kondisi)
+                $("#pokok").val(rupiah(data.pokok))
+                $("#bunga").val(rupiah(data.bunga))
+                $("#modal-nasabah .modal-footer").html(`
+                    <button class="btn btn-icon btn-icon-end btn-outline-secondary mb-1" type="button" data-id="${id}" id="update-nasabah">
+                        <span>Update</span>
+                        <i class="ri-checkbox-line"></i>
+                    </button>
+`)
+                $("#modal-nasabah").modal("show")
+            }
+        });
+    })
+
+    $("#modal-nasabah").on("click", "#update-nasabah", function () {
+        $("#loader3").html(loader3)
+        let button = $(this)
+        $(button).attr("disabled", "true");
+        let id = $(this).data('id')
+        let formdata = $('form[id="form-nasabah"]').serialize();
+        $.ajax({
+            data: formdata,
+            url: "/update/" + id,
+            type: "POST",
+            dataType: 'json',
+            success: function (response) {
+                $("#loader3").html("")
+                $(button).removeAttr("disabled");
+                reset();
+                table.ajax.reload()
+                Swal.fire("Success!", response.success, "success");
+            },
+            error: function (xhr, status, error) {
+                if (xhr.status == 400) {
+                    $("#loader3").html("")
+                    $(button).removeAttr("disabled");
+                    let errors = xhr.responseJSON.errors
+                    displayErrors(errors)
+                }
+            }
+        });
+    })
+    function rupiah(nominal) {
+        return new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR",
+            minimumFractionDigits: 0,
+        })
+            .format(nominal)
+            .replace("Rp", "")
+            .replace(/\./g, ",")
+    }
+    rulesCurrency("#plafond")
+    rulesCurrency("#pokok")
+    rulesCurrency("#bunga")
+    //KOSONGKAN SEMUA INPUTAN
+    function reset() {
+        let form = $("form[id='form-nasabah']").serializeArray();
+        form.map((a) => {
+            $(`#${a.name}`).val("");
+        })
+        $("#modal-nasabah .modal-footer").html("")
+        $("#modal-nasabah").modal("hide")
+    }
+    $("#btn-close-nasabah").on("click", function () {
+        reset()
+    })
     // HAPUS DATA
     $("#tables-nasabah").on("click", ".delete-button", function () {
         //HAPUS DATA
@@ -152,6 +244,18 @@ $(document).ready(function () {
             }
         });
 
+    })
+
+    // CETAK PDF
+    $("#tables-nasabah").on("click", ".download-pdf", function () {
+        let id = $(this).data("id")
+        $("#modal-cetak").modal("show")
+        $("input[name='id']").val(id)
+    })
+    $("#btn-close-cetak").on("click", function () {
+        $("input[name='id']").val("")
+        $("#tanggal").val("")
+        $("#keterangan").val("")
     })
     //Hendler Error
     function displayErrors(errors) {
