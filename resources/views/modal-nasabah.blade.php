@@ -33,7 +33,7 @@
                                     placeholder="Masukan Nama Nasabah">
                             </div>
                             <div class="mb-3">
-                                <label for="alamat" class="form-label"></label>
+                                <label for="alamat" class="form-label">Alamat</label>
                                 <textarea class="form-control" name="alamat" id="alamat" rows="3"></textarea>
                             </div>
                         </div>

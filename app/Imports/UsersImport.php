@@ -21,13 +21,14 @@ class UsersImport implements ToCollection, WithStartRow
                     'cabang' => $row[0], // misalnya kolom kedua adalah email
                     'unit' => $row[1], // misalnya kolom kedua adalah email
                     'nama' => $row[2], // misalnya kolom kedua adalah email
-                    'alamat' => '', // misalnya kolom kedua adalah email
+                    'alamat' => $row[7], // misalnya kolom kedua adalah email
                     'plafond' => $row[4], // misalnya kolom kedua adalah email
                     'jenis_agunan' => '', // misalnya kolom kedua adalah email
                     'kondisi' => '', // misalnya kolom kedua adalah email
                     'pokok' => $row[5], // misalnya kolom kedua adalah email
                     'bunga' => $row[6], // misalnya kolom kedua adalah email
                     'kolek' => null, // misalnya kolom kedua adalah email
+                    'tanggal_permohonan' => null, // misalnya kolom kedua adalah email
                 ]);
             }
         }

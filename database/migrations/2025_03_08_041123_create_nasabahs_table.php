@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('pokok')->nullable();
             $table->integer('bunga')->nullable();
             $table->integer('kolek')->nullable();
+            $table->date('tanggal_permohonan')->nullable();
             $table->timestamps();
         });
     }
