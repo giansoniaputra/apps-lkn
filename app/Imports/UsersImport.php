@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\Nasabah;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToModel;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -28,7 +29,7 @@ class UsersImport implements ToCollection, WithStartRow
                     'pokok' => $row[5], // misalnya kolom kedua adalah email
                     'bunga' => $row[6], // misalnya kolom kedua adalah email
                     'kolek' => null, // misalnya kolom kedua adalah email
-                    'tanggal_permohonan' => null, // misalnya kolom kedua adalah email
+                    'tanggal_permohonan' => Date::excelToDateTimeObject($row[8])->format('Y-m-d'), // misalnya kolom kedua adalah email
                 ]);
             }
         }

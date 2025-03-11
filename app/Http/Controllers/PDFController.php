@@ -15,7 +15,7 @@ class PDFController extends Controller
         $this->pdf = new FPDF;
     }
 
-    public function setSatuHari($hari) 
+    public function setSatuHari($hari)
     {
         return 3600 * 24 * $hari;
     }
@@ -28,6 +28,11 @@ class PDFController extends Controller
     public function rupiah($nominal)
     {
         return "Rp. " . number_format($nominal, 0, ',', '.');
+    }
+
+    public function permohonan($tanggal, $kunjungan = 1)
+    {
+        return strtotime($tanggal) - ($this->setSatuHari(35) * $kunjungan);
     }
     public function cetak_lkn(Request $request)
     {
@@ -221,7 +226,7 @@ class PDFController extends Controller
         $this->pdf->SetXY(28, 188 - $x + 10 + $y);
         $this->pdf->MultiCell(13, 5, $z++, 1, 'C');
         $this->pdf->SetXY(68 - 27, 188 - $x + 10 + $y);
-        $this->pdf->MultiCell(24, 5, date('d/m/Y', strtotime($request->tanggal)), 1, 'C');
+        $this->pdf->MultiCell(24, 5, date('d/m/Y', $this->permohonan($nasabah->tanggal_permohonan, 3)), 1, 'C');
         $this->pdf->SetXY(68 - 27 + 24, 188 - $x + 10 + $y);
         $this->pdf->MultiCell(19.3, 5, "YMP", 1, 'C');
         $this->pdf->SetXY(68 - 27 + 19.3 + 24, 188 - $x + 10 + $y);
@@ -239,13 +244,13 @@ class PDFController extends Controller
         $this->pdf->SetXY(28, 188 - $x + 10 + $y);
         $this->pdf->MultiCell(13, 5, $z++, 1, 'C');
         $this->pdf->SetXY(68 - 27, 188 - $x + 10 + $y);
-        $this->pdf->MultiCell(24, 5, date('d/m/Y', strtotime($request->tanggal)+ 35 * 24 * 3600), 1, 'C');
+        $this->pdf->MultiCell(24, 5, date('d/m/Y', $this->permohonan($nasabah->tanggal_permohonan, 3) + 35 * 24 * 3600), 1, 'C');
         $this->pdf->SetXY(68 - 27 + 24, 188 - $x + 10 + $y);
         $this->pdf->MultiCell(19.3, 5, "YMP", 1, 'C');
         $this->pdf->SetXY(68 - 27 + 19.3 + 24, 188 - $x + 10 + $y);
-        $this->pdf->MultiCell(19.3, 5, date('d/m/Y', strtotime($request->tanggal)+ (35 * 24 * 3600) + $this->setSatuHari(15)), 1, 'C');
+        $this->pdf->MultiCell(19.3, 5, date('d/m/Y', $this->permohonan($nasabah->tanggal_permohonan)), 1, 'C');
         $this->pdf->SetXY(68 - 27 + (19.3 * 2) + 24, 188 - $x + 10 + $y);
-        $this->pdf->MultiCell(19.3, 5, $this->rupiah($this->angsuran($nasabah->plafond)) , 1, 'C');
+        $this->pdf->MultiCell(19.3, 5, $this->rupiah($this->angsuran($nasabah->plafond)), 1, 'C');
         $this->pdf->SetXY(68 - 27 + (19.3 * 3) + 24, 188 - $x + 10 + $y);
         $this->pdf->MultiCell(19.3, 5, "", 1, 'C');
         $this->pdf->SetXY(68 - 27 + (19.3 * 4) + 24, 188 - $x + 10 + $y);
@@ -257,7 +262,7 @@ class PDFController extends Controller
         $this->pdf->SetXY(28, 188 - $x + 10 + $y);
         $this->pdf->MultiCell(13, 5, $z++, 1, 'C');
         $this->pdf->SetXY(68 - 27, 188 - $x + 10 + $y);
-        $this->pdf->MultiCell(24, 5, date('d/m/Y', strtotime($request->tanggal) + (35 * 24 * 3600) * 2), 1, 'C');
+        $this->pdf->MultiCell(24, 5, date('d/m/Y', $this->permohonan($nasabah->tanggal_permohonan)), 1, 'C');
         $this->pdf->SetXY(68 - 27 + 24, 188 - $x + 10 + $y);
         $this->pdf->MultiCell(19.3, 5, "YMP", 1, 'C');
         $this->pdf->SetXY(68 - 27 + 19.3 + 24, 188 - $x + 10 + $y);

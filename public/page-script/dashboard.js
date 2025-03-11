@@ -146,6 +146,7 @@ $(document).ready(function () {
                 $("#plafond").val(rupiah(data.plafond))
                 $("#jenis_agunan").val(data.jenis_agunan)
                 $("#kondisi").val(data.kondisi)
+                $("#tanggal_permohonan").val(data.tanggal_permohonan)
                 $("#pokok").val(rupiah(data.pokok))
                 $("#bunga").val(rupiah(data.bunga))
                 $("#modal-nasabah .modal-footer").html(`

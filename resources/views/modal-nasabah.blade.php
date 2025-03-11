@@ -36,22 +36,17 @@
                                 <label for="alamat" class="form-label">Alamat</label>
                                 <textarea class="form-control" name="alamat" id="alamat" rows="3"></textarea>
                             </div>
+                            <div class="mb-3">
+                                <label for="jenis_agunan" class="form-label">Jenis Agunan</label>
+                                <input type="text" name="jenis_agunan" id="jenis_agunan" class="form-control"
+                                    placeholder="Masukan Jenis Agunan">
+                            </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="plafond" class="form-label">Plafond</label>
                                 <input type="text" name="plafond" id="plafond" class="form-control money"
                                     placeholder="Masukan Plafond">
-                            </div>
-                            <div class="mb-3">
-                                <label for="jenis_agunan" class="form-label">Jenis Agunan</label>
-                                <input type="text" name="jenis_agunan" id="jenis_agunan" class="form-control"
-                                    placeholder="Masukan Jenis Agunan">
-                            </div>
-                            <div class="mb-3">
-                                <label for="kondisi" class="form-label">Kondisi</label>
-                                <input type="text" name="kondisi" id="kondisi" class="form-control"
-                                    placeholder="Masukan Kondisi">
                             </div>
                             <div class="mb-3">
                                 <label for="pokok" class="form-label">Pokok</label>
@@ -64,6 +59,11 @@
                                     placeholder="Masukan BUnga">
                             </div>
                             <div class="mb-3">
+                                <label for="tanggal_permohonan" class="form-label">Tanggal Permohonan</label>
+                                <input type="date" name="tanggal_permohonan" id="tanggal_permohonan"
+                                    class="form-control">
+                            </div>
+                            <div class="mb-3">
                                 <label for="kolek" class="form-label">Kolektabilitas</label>
                                 <select class="form-select form-select-lg" name="kolek" id="kolek">
                                     <option value="">Pilih Kolektabilitas</option>
@@ -74,7 +74,11 @@
                                     <option value="5">5 - Macet</option>
                                 </select>
                             </div>
-
+                            <div class="mb-3">
+                                <label for="kondisi" class="form-label">Kondisi</label>
+                                <input type="text" name="kondisi" id="kondisi" class="form-control"
+                                    placeholder="Masukan Kondisi">
+                            </div>
                         </div>
                     </div>
                 </form>

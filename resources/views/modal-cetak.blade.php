@@ -12,11 +12,11 @@
                     @csrf
                     <input type="hidden" name="id">
                     <div class="row">
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="tanggal" class="form-label">Tanggal Kunjungan</label>
                             <input type="date" class="form-control" name="tanggal" id="tanggal" placeholder=""
                                 required>
-                        </div>
+                        </div> --}}
                         <div class="mb-3">
                             <label for="keterangan" class="form-label">Alasan</label>
                             <textarea class="form-control" name="keterangan" id="keterangan" rows="3"
