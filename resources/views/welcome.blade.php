@@ -24,29 +24,24 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-sm-6">
-                                        <button class="btn btn-icon btn-icon-end btn-outline-success mb-1"
+                                    <div class="col-12 col-sm-6 d-flex justify-content-end">
+                                        <button class="btn btn-icon btn-icon-end btn-outline-success mb-1 me-2"
                                             id="btn-upload-excel" type="button" style="float: right">
                                             <span>Upload Excel</span>
                                             <i class="ri-file-excel-2-line"></i>
                                         </button>
+                                        <a href="/download-template" target="_black"
+                                            class="btn btn-icon btn-icon-end btn-outline-danger download-pdf mb-1">
+                                            <span>Download Template Excel</span>
+                                            <i class="ri-download-2-line"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <div class="col-sm-12 col-md-7 col-lg-9 col-xxl-10 text-end mb-1">
-                        <div class="d-inline-block me-0 me-sm-3 float-start float-md-none">
-                            <!-- Add Button Start -->
-                            <button id="btn-add-data"
-                                class="btn btn-icon btn-icon-only btn-foreground-alternate shadow add-datatable"
-                                data-bs-delay="0" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah Produk"
-                                type="button">
-                                <i data-acorn-icon="plus"></i>
-                            </button>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div class="data-table-responsive-wrapper">

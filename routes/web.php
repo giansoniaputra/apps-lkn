@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\NasabahController;
-use App\Http\Controllers\PDFController;
+use App\Exports\NasabahExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\NasabahController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +26,7 @@ Route::post('/delete/{nasabah}', [NasabahController::class, 'destroy']);
 Route::get('dataTablesNasabah', [NasabahController::class, 'dataTables']);
 
 Route::post('/cetak-lkn', [PDFController::class, 'cetak_lkn']);
+
+Route::get('/download-template', function () {
+    return Excel::download(new NasabahExport, 'template_lkn.xlsx');
+});
