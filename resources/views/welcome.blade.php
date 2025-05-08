@@ -18,18 +18,21 @@
                                     <div class="col-12">
                                         <label class="form-label">Cari Nomor Rekening</label>
                                     </div>
-                                    <div class="col-12 col-sm-6 mb-2">
+                                    <div class="col-12 col-sm-4 mb-2">
                                         <div class="w-100">
                                             <select id="select2Basic" name="search">
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-sm-6 d-flex justify-content-end">
+                                    <div class="col-12 col-sm-4 d-flex justify-content-end">
                                         <button class="btn btn-icon btn-icon-end btn-outline-success mb-1 me-2"
                                             id="btn-upload-excel" type="button" style="float: right">
                                             <span>Upload Excel</span>
                                             <i class="ri-file-excel-2-line"></i>
                                         </button>
+                                        
+                                    </div>
+                                    <div class="col-12 col-sm-4 d-flex justify-content-end">
                                         <a href="/download-template" target="_black"
                                             class="btn btn-icon btn-icon-end btn-outline-danger download-pdf mb-1">
                                             <span>Download Template Excel</span>
